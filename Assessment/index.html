@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>To-Do List</title>
+  </head>
+  <body>
+    <h1>To-Do List</h1>
+    <div class="todo-container">
+      <input type="text" id="taskInput" placeholder="Enter a task" />
+      <button onclick="addTask()">Add</button>
+      <ul id="taskList"></ul>
+    </div>
+
+    <script>
+      function addTask() {
+        const taskInput = document.getElementById("taskInput");
+        const taskText = taskInput.value.trim();
+
+        if (taskText === "") return;
+
+        const li = document.createElement("li");
+        li.innerHTML = `
+        <span>${taskText}</span>
+        <div class="actions">
+          <button onclick="completeTask(this)">✔</button>
+          <button onclick="deleteTask(this)">✖</button>
+        </div>
+      `;
+
+        document.getElementById("taskList").appendChild(li);
+        taskInput.value = "";
+      }
+
+      function completeTask(button) {
+        const li = button.closest("li");
+        li.classList.toggle("completed");
+      }
+
+      function deleteTask(button) {
+        const li = button.closest("li");
+        li.remove();
+      }
+    </script>
+  </body>
+</html>
